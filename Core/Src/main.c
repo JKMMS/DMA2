@@ -46,12 +46,19 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DAC_FREQ 2000 ///frequência do DAC → 2KHz
-#define ADC_FREQ 10000 ///frequência do ADC → 10KHz
+///frequência do DAC → 2KHz
+#define DAC_FREQ 2000
+
+///frequência do ADC → 10KHz
+#define ADC_FREQ 10000
+
+
 ///número de pontos para cada ciclo da onda → 360º/100=3,6
 ///o número de pontos define também a frequência da onda → 100 pontos a 2KHz vai dar uma frequência da onda de 20Hz
 #define POINTS_PERIOD 1000
-#define PI 3.141592 ///define do valor de PI usado para fazer os cálculos da onda senoidal
+
+///define do valor de PI usado para fazer os cálculos da onda senoidal
+#define PI 3.141592
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -68,18 +75,32 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-void triangle_gen(int val_n); ///função que gera uma onda triangular
-void sine_gen (int val_n); ///função que gera uma onda senoidal
+///função que gera uma onda triangular
+void triangle_gen(int val_n);
+
+///função que gera uma onda senoidal
+void sine_gen (int val_n);
+
+////função que calcula a nova frequência se o define for alterado
 void freq_change (uint16_t PSC, uint32_t FREQ, TIM_HandleTypeDef* htim);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint16_t sin_val[POINTS_PERIOD]; ///vetor que recebe os valores da onda senoidal
-uint16_t triangle_val[POINTS_PERIOD]; ///vetor que recebe os valores da onda triangular
-volatile uint16_t adc_val[2] = {0,0}; ///vetor que armazena os valores de cada canal do ADC
-uint16_t ch0=0, ch1=0; ///canais do ADC
-enum{IN0=0, IN1}; ///enumeração
+///vetor que recebe os valores da onda senoidal
+uint16_t sin_val[POINTS_PERIOD];
+
+///vetor que recebe os valores da onda triangular
+uint16_t triangle_val[POINTS_PERIOD];
+
+///vetor que armazena os valores de cada canal do ADC
+volatile uint16_t adc_val[2] = {0,0};
+
+///canais do ADC
+uint16_t ch0=0, ch1=0;
+
+///enumeração
+enum{IN0=0, IN1};
 /* USER CODE END 0 */
 
 /**
@@ -119,24 +140,32 @@ int main(void)
   /* USER CODE BEGIN 2 */
   ///Muda a frequência do trigger do ADC → TIMER2
   freq_change (84,ADC_FREQ,&htim2);
+
   ///Muda a frequência do trigger do DAC → TIMER4
   freq_change(84,DAC_FREQ,&htim4);
+
   ///Inicialização do OC do canal 1 do TIMER2 → PA15
   ///Usado para testar a frequência
   HAL_TIM_OC_Start_IT(&htim2, TIM_CHANNEL_1);
+
   ///Inicialização do OC do canal 1 do TIMER4 → PB6
   ///Usado para testar a frequência
   HAL_TIM_OC_Start_IT(&htim4, TIM_CHANNEL_1);
+
   ///Gera o sinal senoidal
   sine_gen(POINTS_PERIOD);
+
   ///Gera o sinal triangular
   triangle_gen(POINTS_PERIOD);
+
   ///Inicialização do DAC por meio de DMA → Canal 1: Onda Triangular → PA4
   ///Usando modo circular, então só precisa mandar iniciar uma vez
   HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, (uint32_t*)&triangle_val[0], POINTS_PERIOD, DAC_ALIGN_12B_R);
+
   ///Inicialização do DAC por meio de DMA → Canal 2: Onda Senoidal → PA5
   ///Usando modo circular, então só precisa mandar iniciar uma vez
   HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_2,(uint32_t*)&sin_val[0], POINTS_PERIOD, DAC_ALIGN_12B_R);
+
   ///Inicialização da amostragem do ADC2 → PA0 e PA1
   ///Usando modo normal, então é necessário "pedir" para ele fazer de novo
   HAL_ADC_Start_DMA(&hadc2, (uint32_t*)&adc_val[0],2);
@@ -206,6 +235,7 @@ void SystemClock_Config(void)
 			sin_val[i] = (1800*(1 + sin(i*2*PI/val_n)));
 		}
 	}
+
 ///Função que faz o cálculo da onda triangular
 	void triangle_gen(int val_n){
 		int i;
@@ -213,16 +243,19 @@ void SystemClock_Config(void)
 			triangle_val[i] = i*4000/val_n;
 		}
 	}
+
 ///Função que calcula o novo valor da frequência quando mudar o o define de DAC_FREQ ou ADC_FREQ, já que ela é ajustável como pede no exercício
 	void freq_change(uint16_t PSC, uint32_t FREQ, TIM_HandleTypeDef* htim){
+		///Primeiro calcula o valor do ARR
 		int ARR = (84000000/(PSC*FREQ))-1;
-		if(ARR>65000){
-			PSC = 1291;
-			ARR = (84000000/(PSC*FREQ))-1;
+		if(ARR>65000){ ///Se o valor calculado de ARR passar de 64999, que é o maximo que ele pode ter
+			PSC = 1291; ///Estabelece um valor fixo para o PSC
+			ARR = (84000000/(PSC*FREQ))-1; ///e calcula o ARR novamente
 		}
 		__HAL_TIM_SET_PRESCALER(htim, PSC); ///seta o novo valor de PSC
 		__HAL_TIM_SET_AUTORELOAD(htim, ARR); ///seta o novo valor de ARR
 	}
+
 
 	/**
 	 * Essa função significa que a conversão está completa e gera uma interrupção

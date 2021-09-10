@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0002000c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00011f6b  00000000  00000000  0002003c  2**0
+ 12 .debug_info   00011f6f  00000000  00000000  0002003c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002bd7  00000000  00000000  00031fa7  2**0
+ 13 .debug_abbrev 00002c20  00000000  00000000  00031fab  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000fa8  00000000  00000000  00034b80  2**3
+ 14 .debug_aranges 00000fa8  00000000  00000000  00034bd0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000e70  00000000  00000000  00035b28  2**3
+ 15 .debug_ranges 00000e70  00000000  00000000  00035b78  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00024840  00000000  00000000  00036998  2**0
+ 16 .debug_macro  00024840  00000000  00000000  000369e8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   000138be  00000000  00000000  0005b1d8  2**0
+ 17 .debug_line   000138be  00000000  00000000  0005b228  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000df352  00000000  00000000  0006ea96  2**0
+ 18 .debug_str    000df352  00000000  00000000  0006eae6  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  0014dde8  2**0
+ 19 .comment      00000053  00000000  00000000  0014de38  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000442c  00000000  00000000  0014de3c  2**2
+ 20 .debug_frame  0000442c  00000000  00000000  0014de8c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1984,32 +1984,38 @@ int main(void)
  8001338:	f242 7110 	movw	r1, #10000	; 0x2710
  800133c:	2054      	movs	r0, #84	; 0x54
  800133e:	f000 f929 	bl	8001594 <freq_change>
+
   ///Muda a frequência do trigger do DAC → TIMER4
   freq_change(84,DAC_FREQ,&htim4);
  8001342:	4a18      	ldr	r2, [pc, #96]	; (80013a4 <main+0x98>)
  8001344:	f44f 61fa 	mov.w	r1, #2000	; 0x7d0
  8001348:	2054      	movs	r0, #84	; 0x54
  800134a:	f000 f923 	bl	8001594 <freq_change>
+
   ///Inicialização do OC do canal 1 do TIMER2 → PA15
   ///Usado para testar a frequência
   HAL_TIM_OC_Start_IT(&htim2, TIM_CHANNEL_1);
  800134e:	2100      	movs	r1, #0
  8001350:	4813      	ldr	r0, [pc, #76]	; (80013a0 <main+0x94>)
  8001352:	f002 fed3 	bl	80040fc <HAL_TIM_OC_Start_IT>
+
   ///Inicialização do OC do canal 1 do TIMER4 → PB6
   ///Usado para testar a frequência
   HAL_TIM_OC_Start_IT(&htim4, TIM_CHANNEL_1);
  8001356:	2100      	movs	r1, #0
  8001358:	4812      	ldr	r0, [pc, #72]	; (80013a4 <main+0x98>)
  800135a:	f002 fecf 	bl	80040fc <HAL_TIM_OC_Start_IT>
+
   ///Gera o sinal senoidal
   sine_gen(POINTS_PERIOD);
  800135e:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  8001362:	f000 f899 	bl	8001498 <sine_gen>
+
   ///Gera o sinal triangular
   triangle_gen(POINTS_PERIOD);
  8001366:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  800136a:	f000 f8ef 	bl	800154c <triangle_gen>
+
   ///Inicialização do DAC por meio de DMA → Canal 1: Onda Triangular → PA4
   ///Usando modo circular, então só precisa mandar iniciar uma vez
   HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, (uint32_t*)&triangle_val[0], POINTS_PERIOD, DAC_ALIGN_12B_R);
@@ -2020,6 +2026,7 @@ int main(void)
  8001378:	2100      	movs	r1, #0
  800137a:	480c      	ldr	r0, [pc, #48]	; (80013ac <main+0xa0>)
  800137c:	f001 f9e2 	bl	8002744 <HAL_DAC_Start_DMA>
+
   ///Inicialização do DAC por meio de DMA → Canal 2: Onda Senoidal → PA5
   ///Usando modo circular, então só precisa mandar iniciar uma vez
   HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_2,(uint32_t*)&sin_val[0], POINTS_PERIOD, DAC_ALIGN_12B_R);
@@ -2030,6 +2037,7 @@ int main(void)
  800138a:	2110      	movs	r1, #16
  800138c:	4807      	ldr	r0, [pc, #28]	; (80013ac <main+0xa0>)
  800138e:	f001 f9d9 	bl	8002744 <HAL_DAC_Start_DMA>
+
   ///Inicialização da amostragem do ADC2 → PA0 e PA1
   ///Usando modo normal, então é necessário "pedir" para ele fazer de novo
   HAL_ADC_Start_DMA(&hadc2, (uint32_t*)&adc_val[0],2);
@@ -2272,6 +2280,7 @@ void SystemClock_Config(void)
  8001548:	400921fa 	.word	0x400921fa
 
 0800154c <triangle_gen>:
+
 ///Função que faz o cálculo da onda triangular
 	void triangle_gen(int val_n){
  800154c:	b480      	push	{r7}
@@ -2312,6 +2321,7 @@ void SystemClock_Config(void)
  8001590:	2000097c 	.word	0x2000097c
 
 08001594 <freq_change>:
+
 ///Função que calcula o novo valor da frequência quando mudar o o define de DAC_FREQ ou ADC_FREQ, já que ela é ajustável como pede no exercício
 	void freq_change(uint16_t PSC, uint32_t FREQ, TIM_HandleTypeDef* htim){
  8001594:	b480      	push	{r7}
@@ -2321,6 +2331,7 @@ void SystemClock_Config(void)
  800159c:	60b9      	str	r1, [r7, #8]
  800159e:	607a      	str	r2, [r7, #4]
  80015a0:	81fb      	strh	r3, [r7, #14]
+		///Primeiro calcula o valor do ARR
 		int ARR = (84000000/(PSC*FREQ))-1;
  80015a2:	89fb      	ldrh	r3, [r7, #14]
  80015a4:	68ba      	ldr	r2, [r7, #8]
@@ -2329,15 +2340,15 @@ void SystemClock_Config(void)
  80015ac:	fbb2 f3f3 	udiv	r3, r2, r3
  80015b0:	3b01      	subs	r3, #1
  80015b2:	617b      	str	r3, [r7, #20]
-		if(ARR>65000){
+		if(ARR>65000){ ///Se o valor calculado de ARR passar de 64999, que é o maximo que ele pode ter
  80015b4:	697b      	ldr	r3, [r7, #20]
  80015b6:	f64f 52e8 	movw	r2, #65000	; 0xfde8
  80015ba:	4293      	cmp	r3, r2
  80015bc:	dd0b      	ble.n	80015d6 <freq_change+0x42>
-			PSC = 1291;
+			PSC = 1291; ///Estabelece um valor fixo para o PSC
  80015be:	f240 530b 	movw	r3, #1291	; 0x50b
  80015c2:	81fb      	strh	r3, [r7, #14]
-			ARR = (84000000/(PSC*FREQ))-1;
+			ARR = (84000000/(PSC*FREQ))-1; ///e calcula o ARR novamente
  80015c4:	89fb      	ldrh	r3, [r7, #14]
  80015c6:	68ba      	ldr	r2, [r7, #8]
  80015c8:	fb02 f303 	mul.w	r3, r2, r3

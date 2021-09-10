@@ -1,0 +1,684 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>DMA2: Referência do Arquivo C:/Users/jaque/STM32CubeIDE/workspace_1.6.0/DMA2/Core/Src/main.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">DMA2
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Esse exercício usa dois canais do ADC com DMA para gerar sinais com período configurável e podem ser vistos pelo DAC usando o Cube Monitor</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Busca','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_bc84256498dc5614be2bf6f96d0ea448.html">STM32CubeIDE</a></li><li class="navelem"><a class="el" href="dir_d68f96515942b0cbb122a2ff87c20a0f.html">workspace_1.6.0</a></li><li class="navelem"><a class="el" href="dir_1d7989aca6f382648482c131431954d5.html">DMA2</a></li><li class="navelem"><a class="el" href="dir_2063121d4eac82b75bca1ac25f4099a9.html">Core</a></li><li class="navelem"><a class="el" href="dir_12a949499490a4c50dd1ef405151f103.html">Src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definições e Macros</a> &#124;
+<a href="#enum-members">Enumerações</a> &#124;
+<a href="#func-members">Funções</a> &#124;
+<a href="#var-members">Variáveis</a>  </div>
+  <div class="headertitle">
+<div class="title">Referência do Arquivo main.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>: Main program body  
+<a href="#details">Mais...</a></p>
+<div class="textblock"><code>#include &quot;main.h&quot;</code><br />
+<code>#include &quot;adc.h&quot;</code><br />
+<code>#include &quot;dac.h&quot;</code><br />
+<code>#include &quot;dma.h&quot;</code><br />
+<code>#include &quot;tim.h&quot;</code><br />
+<code>#include &quot;usart.h&quot;</code><br />
+<code>#include &quot;gpio.h&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Definições e Macros</h2></td></tr>
+<tr class="memitem:a730ec2eaf2cee31805f583395b7cb1c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a730ec2eaf2cee31805f583395b7cb1c6">DAC_FREQ</a>&#160;&#160;&#160;2000</td></tr>
+<tr class="memdesc:a730ec2eaf2cee31805f583395b7cb1c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">frequência do DAC → 2KHz  <a href="main_8c.html#a730ec2eaf2cee31805f583395b7cb1c6">Mais...</a><br /></td></tr>
+<tr class="separator:a730ec2eaf2cee31805f583395b7cb1c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a708a9d33b707bbd9398a192347f650d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a708a9d33b707bbd9398a192347f650d1">ADC_FREQ</a>&#160;&#160;&#160;10000</td></tr>
+<tr class="memdesc:a708a9d33b707bbd9398a192347f650d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">frequência do ADC → 10KHz  <a href="main_8c.html#a708a9d33b707bbd9398a192347f650d1">Mais...</a><br /></td></tr>
+<tr class="separator:a708a9d33b707bbd9398a192347f650d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06aba3b989aee5c89b5524336abfcb45"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a06aba3b989aee5c89b5524336abfcb45">POINTS_PERIOD</a>&#160;&#160;&#160;1000</td></tr>
+<tr class="separator:a06aba3b989aee5c89b5524336abfcb45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a598a3330b3c21701223ee0ca14316eca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a598a3330b3c21701223ee0ca14316eca">PI</a>&#160;&#160;&#160;3.141592</td></tr>
+<tr class="memdesc:a598a3330b3c21701223ee0ca14316eca"><td class="mdescLeft">&#160;</td><td class="mdescRight">define do valor de PI usado para fazer os cálculos da onda senoidal  <a href="main_8c.html#a598a3330b3c21701223ee0ca14316eca">Mais...</a><br /></td></tr>
+<tr class="separator:a598a3330b3c21701223ee0ca14316eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerações</h2></td></tr>
+<tr class="memitem:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="main_8c.html#a06fc87d81c62e9abb8790b6e5713c55bac3dd209481e8202f17c081be7988ad12">IN0</a> =0
+, <a class="el" href="main_8c.html#a06fc87d81c62e9abb8790b6e5713c55baec3dec5acc8382e7fd1f6ea791599e9b">IN1</a>
+ }</td></tr>
+<tr class="memdesc:a06fc87d81c62e9abb8790b6e5713c55b"><td class="mdescLeft">&#160;</td><td class="mdescRight">enumeração  <a href="main_8c.html#a06fc87d81c62e9abb8790b6e5713c55b">Mais...</a><br /></td></tr>
+<tr class="separator:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:a70af21c671abfcc773614a9a4f63d920"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a70af21c671abfcc773614a9a4f63d920">SystemClock_Config</a> (void)</td></tr>
+<tr class="memdesc:a70af21c671abfcc773614a9a4f63d920"><td class="mdescLeft">&#160;</td><td class="mdescRight">System Clock Configuration.  <a href="main_8c.html#a70af21c671abfcc773614a9a4f63d920">Mais...</a><br /></td></tr>
+<tr class="separator:a70af21c671abfcc773614a9a4f63d920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a577d85c0b45c468874da66c791df7475"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a577d85c0b45c468874da66c791df7475">triangle_gen</a> (int val_n)</td></tr>
+<tr class="memdesc:a577d85c0b45c468874da66c791df7475"><td class="mdescLeft">&#160;</td><td class="mdescRight">função que gera uma onda triangular  <a href="main_8c.html#a577d85c0b45c468874da66c791df7475">Mais...</a><br /></td></tr>
+<tr class="separator:a577d85c0b45c468874da66c791df7475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a571f13fdd6e6d2b79d38e2cbcaaba0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a7a571f13fdd6e6d2b79d38e2cbcaaba0">sine_gen</a> (int val_n)</td></tr>
+<tr class="memdesc:a7a571f13fdd6e6d2b79d38e2cbcaaba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">função que gera uma onda senoidal  <a href="main_8c.html#a7a571f13fdd6e6d2b79d38e2cbcaaba0">Mais...</a><br /></td></tr>
+<tr class="separator:a7a571f13fdd6e6d2b79d38e2cbcaaba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a8d1388f8d4b75e00ca93a0efb77967"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a0a8d1388f8d4b75e00ca93a0efb77967">freq_change</a> (uint16_t PSC, uint32_t FREQ, TIM_HandleTypeDef *htim)</td></tr>
+<tr class="memdesc:a0a8d1388f8d4b75e00ca93a0efb77967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que calcula o novo valor da frequência quando mudar o o define de DAC_FREQ ou ADC_FREQ, já que ela é ajustável como pede no exercício.  <a href="main_8c.html#a0a8d1388f8d4b75e00ca93a0efb77967">Mais...</a><br /></td></tr>
+<tr class="separator:a0a8d1388f8d4b75e00ca93a0efb77967"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
+<tr class="memdesc:a840291bc02cba5474a4cb46a9b9566fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The application entry point.  <a href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">Mais...</a><br /></td></tr>
+<tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af20a88180db1113be1e89266917d148b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#af20a88180db1113be1e89266917d148b">HAL_ADC_ConvCpltCallback</a> (ADC_HandleTypeDef *hadc)</td></tr>
+<tr class="separator:af20a88180db1113be1e89266917d148b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1730ffe1e560465665eb47d9264826f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a1730ffe1e560465665eb47d9264826f9">Error_Handler</a> (void)</td></tr>
+<tr class="memdesc:a1730ffe1e560465665eb47d9264826f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is executed in case of error occurrence.  <a href="main_8c.html#a1730ffe1e560465665eb47d9264826f9">Mais...</a><br /></td></tr>
+<tr class="separator:a1730ffe1e560465665eb47d9264826f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variáveis</h2></td></tr>
+<tr class="memitem:ac76be59189749cae6e024242f8feefb0"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ac76be59189749cae6e024242f8feefb0">sin_val</a> [<a class="el" href="main_8c.html#a06aba3b989aee5c89b5524336abfcb45">POINTS_PERIOD</a>]</td></tr>
+<tr class="memdesc:ac76be59189749cae6e024242f8feefb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">vetor que recebe os valores da onda senoidal  <a href="main_8c.html#ac76be59189749cae6e024242f8feefb0">Mais...</a><br /></td></tr>
+<tr class="separator:ac76be59189749cae6e024242f8feefb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66fb43f1cba75edadc5f6a89590fee64"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a66fb43f1cba75edadc5f6a89590fee64">triangle_val</a> [<a class="el" href="main_8c.html#a06aba3b989aee5c89b5524336abfcb45">POINTS_PERIOD</a>]</td></tr>
+<tr class="memdesc:a66fb43f1cba75edadc5f6a89590fee64"><td class="mdescLeft">&#160;</td><td class="mdescRight">vetor que recebe os valores da onda triangular  <a href="main_8c.html#a66fb43f1cba75edadc5f6a89590fee64">Mais...</a><br /></td></tr>
+<tr class="separator:a66fb43f1cba75edadc5f6a89590fee64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc8117c094c2089ba60f75b36c13d69e"><td class="memItemLeft" align="right" valign="top">volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#adc8117c094c2089ba60f75b36c13d69e">adc_val</a> [2] = {0,0}</td></tr>
+<tr class="memdesc:adc8117c094c2089ba60f75b36c13d69e"><td class="mdescLeft">&#160;</td><td class="mdescRight">vetor que armazena os valores de cada canal do ADC  <a href="main_8c.html#adc8117c094c2089ba60f75b36c13d69e">Mais...</a><br /></td></tr>
+<tr class="separator:adc8117c094c2089ba60f75b36c13d69e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4755da781cf996b02fcc5dcc67ed49a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ab4755da781cf996b02fcc5dcc67ed49a">ch0</a> =0</td></tr>
+<tr class="memdesc:ab4755da781cf996b02fcc5dcc67ed49a"><td class="mdescLeft">&#160;</td><td class="mdescRight">canais do ADC  <a href="main_8c.html#ab4755da781cf996b02fcc5dcc67ed49a">Mais...</a><br /></td></tr>
+<tr class="separator:ab4755da781cf996b02fcc5dcc67ed49a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e510643ae23882d12cf269abc340e20"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a7e510643ae23882d12cf269abc340e20">ch1</a> =0</td></tr>
+<tr class="separator:a7e510643ae23882d12cf269abc340e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>: Main program body </p>
+<p>Jaqueline Maurer Machado Turma 4422 Nº 11 Exercício 2 da Lista de DMA</p>
+<dl class="section attention"><dt>Atenção</dt><dd></dd></dl>
+<h2><center>&copy; Copyright (c) 2021 STMicroelectronics. All rights reserved.</center></h2>
+<p>This software component is licensed by ST under BSD 3-Clause license, the "License"; You may not use this file except in compliance with the License. You may obtain a copy of the License at: opensource.org/licenses/BSD-3-Clause </p>
+</div><h2 class="groupheader">Definições e macros</h2>
+<a id="a708a9d33b707bbd9398a192347f650d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a708a9d33b707bbd9398a192347f650d1">&#9670;&nbsp;</a></span>ADC_FREQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ADC_FREQ&#160;&#160;&#160;10000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>frequência do ADC → 10KHz </p>
+
+</div>
+</div>
+<a id="a730ec2eaf2cee31805f583395b7cb1c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a730ec2eaf2cee31805f583395b7cb1c6">&#9670;&nbsp;</a></span>DAC_FREQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DAC_FREQ&#160;&#160;&#160;2000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>frequência do DAC → 2KHz </p>
+
+</div>
+</div>
+<a id="a598a3330b3c21701223ee0ca14316eca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a598a3330b3c21701223ee0ca14316eca">&#9670;&nbsp;</a></span>PI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PI&#160;&#160;&#160;3.141592</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>define do valor de PI usado para fazer os cálculos da onda senoidal </p>
+
+</div>
+</div>
+<a id="a06aba3b989aee5c89b5524336abfcb45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06aba3b989aee5c89b5524336abfcb45">&#9670;&nbsp;</a></span>POINTS_PERIOD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define POINTS_PERIOD&#160;&#160;&#160;1000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>número de pontos para cada ciclo da onda → 360º/100=3,6 o número de pontos define também a frequência da onda → 100 pontos a 2KHz vai dar uma frequência da onda de 20Hz </p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumerações</h2>
+<a id="a06fc87d81c62e9abb8790b6e5713c55b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06fc87d81c62e9abb8790b6e5713c55b">&#9670;&nbsp;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>enumeração </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumeradores</th></tr><tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55bac3dd209481e8202f17c081be7988ad12"></a>IN0&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55baec3dec5acc8382e7fd1f6ea791599e9b"></a>IN1&#160;</td><td class="fielddoc"></td></tr>
+</table>
+<div class="fragment"><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{<a class="code" href="main_8c.html#a06fc87d81c62e9abb8790b6e5713c55bac3dd209481e8202f17c081be7988ad12">IN0</a>=0, <a class="code" href="main_8c.html#a06fc87d81c62e9abb8790b6e5713c55baec3dec5acc8382e7fd1f6ea791599e9b">IN1</a>};</div>
+<div class="ttc" id="amain_8c_html_a06fc87d81c62e9abb8790b6e5713c55bac3dd209481e8202f17c081be7988ad12"><div class="ttname"><a href="main_8c.html#a06fc87d81c62e9abb8790b6e5713c55bac3dd209481e8202f17c081be7988ad12">IN0</a></div><div class="ttdeci">@ IN0</div><div class="ttdef"><b>Definition:</b> main.c:103</div></div>
+<div class="ttc" id="amain_8c_html_a06fc87d81c62e9abb8790b6e5713c55baec3dec5acc8382e7fd1f6ea791599e9b"><div class="ttname"><a href="main_8c.html#a06fc87d81c62e9abb8790b6e5713c55baec3dec5acc8382e7fd1f6ea791599e9b">IN1</a></div><div class="ttdeci">@ IN1</div><div class="ttdef"><b>Definition:</b> main.c:103</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Funções</h2>
+<a id="a1730ffe1e560465665eb47d9264826f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1730ffe1e560465665eb47d9264826f9">&#9670;&nbsp;</a></span>Error_Handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Error_Handler </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is executed in case of error occurrence. </p>
+<dl class="retval"><dt>Valores Retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;{</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;  <span class="comment">/* USER CODE BEGIN Error_Handler_Debug */</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <span class="comment">/* User can add his own implementation to report the HAL error return state */</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  __disable_irq();</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  <span class="keywordflow">while</span> (1)</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  }</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  <span class="comment">/* USER CODE END Error_Handler_Debug */</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0a8d1388f8d4b75e00ca93a0efb77967"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a8d1388f8d4b75e00ca93a0efb77967">&#9670;&nbsp;</a></span>freq_change()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freq_change </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>PSC</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>FREQ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TIM_HandleTypeDef *&#160;</td>
+          <td class="paramname"><em>htim</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que calcula o novo valor da frequência quando mudar o o define de DAC_FREQ ou ADC_FREQ, já que ela é ajustável como pede no exercício. </p>
+<p>Primeiro calcula o valor do ARR</p>
+<p>Se o valor calculado de ARR passar de 64999, que é o maximo que ele pode ter</p>
+<p>Estabelece um valor fixo para o PSC</p>
+<p>e calcula o ARR novamente</p>
+<p>seta o novo valor de PSC</p>
+<p>seta o novo valor de ARR</p>
+<div class="fragment"><div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                                                                          {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        <span class="keywordtype">int</span> ARR = (84000000/(PSC*FREQ))-1;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        <span class="keywordflow">if</span>(ARR&gt;65000){ </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            PSC = 1291; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            ARR = (84000000/(PSC*FREQ))-1; </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        }</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        __HAL_TIM_SET_PRESCALER(htim, PSC); </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        __HAL_TIM_SET_AUTORELOAD(htim, ARR); </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af20a88180db1113be1e89266917d148b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af20a88180db1113be1e89266917d148b">&#9670;&nbsp;</a></span>HAL_ADC_ConvCpltCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HAL_ADC_ConvCpltCallback </td>
+          <td>(</td>
+          <td class="paramtype">ADC_HandleTypeDef *&#160;</td>
+          <td class="paramname"><em>hadc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Essa função significa que a conversão está completa e gera uma interrupção Quando o ADC mandar os valores por DMA para a memória, vai gerar uma interrupção Com essa interrupção, por estar no modo normal, é preciso "pedir" para que o DMA faça esse processo novamente </p>
+<p>salva os valores do canal 0 do ADC na variável ch0</p>
+<p>salva os valores do canal 1 do ADC na variável ch1</p>
+<p>inicializa novamente fazer uma nova conversão e enviar para a memória</p>
+<div class="fragment"><div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                                                          {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <a class="code" href="main_8c.html#ab4755da781cf996b02fcc5dcc67ed49a">ch0</a> = <a class="code" href="main_8c.html#adc8117c094c2089ba60f75b36c13d69e">adc_val</a>[<a class="code" href="main_8c.html#a06fc87d81c62e9abb8790b6e5713c55bac3dd209481e8202f17c081be7988ad12">IN0</a>]; </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <a class="code" href="main_8c.html#a7e510643ae23882d12cf269abc340e20">ch1</a> = <a class="code" href="main_8c.html#adc8117c094c2089ba60f75b36c13d69e">adc_val</a>[<a class="code" href="main_8c.html#a06fc87d81c62e9abb8790b6e5713c55baec3dec5acc8382e7fd1f6ea791599e9b">IN1</a>]; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        HAL_ADC_Start_DMA(&amp;<a class="code" href="adc_8c.html#acd9221f1aa19aebfe0b744947f2daf49">hadc2</a>, &amp;<a class="code" href="main_8c.html#adc8117c094c2089ba60f75b36c13d69e">adc_val</a>[0], 2); </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    }</div>
+<div class="ttc" id="aadc_8c_html_acd9221f1aa19aebfe0b744947f2daf49"><div class="ttname"><a href="adc_8c.html#acd9221f1aa19aebfe0b744947f2daf49">hadc2</a></div><div class="ttdeci">ADC_HandleTypeDef hadc2</div><div class="ttdef"><b>Definition:</b> adc.c:27</div></div>
+<div class="ttc" id="amain_8c_html_a7e510643ae23882d12cf269abc340e20"><div class="ttname"><a href="main_8c.html#a7e510643ae23882d12cf269abc340e20">ch1</a></div><div class="ttdeci">uint16_t ch1</div><div class="ttdef"><b>Definition:</b> main.c:100</div></div>
+<div class="ttc" id="amain_8c_html_ab4755da781cf996b02fcc5dcc67ed49a"><div class="ttname"><a href="main_8c.html#ab4755da781cf996b02fcc5dcc67ed49a">ch0</a></div><div class="ttdeci">uint16_t ch0</div><div class="ttdoc">canais do ADC</div><div class="ttdef"><b>Definition:</b> main.c:100</div></div>
+<div class="ttc" id="amain_8c_html_adc8117c094c2089ba60f75b36c13d69e"><div class="ttname"><a href="main_8c.html#adc8117c094c2089ba60f75b36c13d69e">adc_val</a></div><div class="ttdeci">volatile uint16_t adc_val[2]</div><div class="ttdoc">vetor que armazena os valores de cada canal do ADC</div><div class="ttdef"><b>Definition:</b> main.c:97</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a840291bc02cba5474a4cb46a9b9566fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840291bc02cba5474a4cb46a9b9566fe">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The application entry point. </p>
+<dl class="retval"><dt>Valores Retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">int</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Muda a frequência do trigger do ADC → TIMER2</p>
+<p>Muda a frequência do trigger do DAC → TIMER4</p>
+<p>Inicialização do OC do canal 1 do TIMER2 → PA15 Usado para testar a frequência</p>
+<p>Inicialização do OC do canal 1 do TIMER4 → PB6 Usado para testar a frequência</p>
+<p>Gera o sinal senoidal</p>
+<p>Gera o sinal triangular</p>
+<p>Inicialização do DAC por meio de DMA → Canal 1: Onda Triangular → PA4 Usando modo circular, então só precisa mandar iniciar uma vez</p>
+<p>Inicialização do DAC por meio de DMA → Canal 2: Onda Senoidal → PA5 Usando modo circular, então só precisa mandar iniciar uma vez</p>
+<p>Inicialização da amostragem do ADC2 → PA0 e PA1 Usando modo normal, então é necessário "pedir" para ele fazer de novo</p>
+<div class="fragment"><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;{</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="comment">/* USER CODE BEGIN 1 */</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="comment">/* USER CODE END 1 */</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="comment">/* MCU Configuration--------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="comment">/* Reset of all peripherals, Initializes the Flash interface and the Systick. */</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  HAL_Init();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="comment">/* USER CODE BEGIN Init */</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="comment">/* USER CODE END Init */</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="comment">/* Configure the system clock */</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <a class="code" href="main_8c.html#a70af21c671abfcc773614a9a4f63d920">SystemClock_Config</a>();</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="comment">/* USER CODE BEGIN SysInit */</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="comment">/* USER CODE END SysInit */</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="comment">/* Initialize all configured peripherals */</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <a class="code" href="gpio_8c.html#ac724e431d2af879252de35615be2bdea">MX_GPIO_Init</a>();</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <a class="code" href="dma_8c.html#a323249dac769f9855c10b4ec9446b707">MX_DMA_Init</a>();</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <a class="code" href="usart_8c.html#a052088fe5bb3f807a4b2502e664fd4fd">MX_USART2_UART_Init</a>();</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <a class="code" href="adc_8c.html#a101e2e3433dfe72bbbd0ae3a84489263">MX_ADC2_Init</a>();</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <a class="code" href="dac_8c.html#adac6621f933c065bc075ac0af3cbbb54">MX_DAC_Init</a>();</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  <a class="code" href="tim_8c.html#aef1e0b132b1af1c923cc420a57180c67">MX_TIM4_Init</a>();</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  <a class="code" href="tim_8c.html#a4b8ff887fd3fdf26605e35927e4ff202">MX_TIM2_Init</a>();</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <span class="comment">/* USER CODE BEGIN 2 */</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <a class="code" href="main_8c.html#a0a8d1388f8d4b75e00ca93a0efb77967">freq_change</a> (84,<a class="code" href="main_8c.html#a708a9d33b707bbd9398a192347f650d1">ADC_FREQ</a>,&amp;<a class="code" href="stm32f4xx__it_8c.html#a2c80fd5510e2990a59a5c90d745c716c">htim2</a>);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <a class="code" href="main_8c.html#a0a8d1388f8d4b75e00ca93a0efb77967">freq_change</a>(84,<a class="code" href="main_8c.html#a730ec2eaf2cee31805f583395b7cb1c6">DAC_FREQ</a>,&amp;<a class="code" href="stm32f4xx__it_8c.html#a85788cec5a97ee377e4ee2e74f026484">htim4</a>);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  HAL_TIM_OC_Start_IT(&amp;<a class="code" href="stm32f4xx__it_8c.html#a2c80fd5510e2990a59a5c90d745c716c">htim2</a>, TIM_CHANNEL_1);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  HAL_TIM_OC_Start_IT(&amp;<a class="code" href="stm32f4xx__it_8c.html#a85788cec5a97ee377e4ee2e74f026484">htim4</a>, TIM_CHANNEL_1);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <a class="code" href="main_8c.html#a7a571f13fdd6e6d2b79d38e2cbcaaba0">sine_gen</a>(<a class="code" href="main_8c.html#a06aba3b989aee5c89b5524336abfcb45">POINTS_PERIOD</a>);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <a class="code" href="main_8c.html#a577d85c0b45c468874da66c791df7475">triangle_gen</a>(<a class="code" href="main_8c.html#a06aba3b989aee5c89b5524336abfcb45">POINTS_PERIOD</a>);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  HAL_DAC_Start_DMA(&amp;<a class="code" href="dac_8c.html#a40a0d1383beda58531dfda6218720e45">hdac</a>, DAC_CHANNEL_1, (uint32_t*)&amp;<a class="code" href="main_8c.html#a66fb43f1cba75edadc5f6a89590fee64">triangle_val</a>[0], <a class="code" href="main_8c.html#a06aba3b989aee5c89b5524336abfcb45">POINTS_PERIOD</a>, DAC_ALIGN_12B_R);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  HAL_DAC_Start_DMA(&amp;<a class="code" href="dac_8c.html#a40a0d1383beda58531dfda6218720e45">hdac</a>, DAC_CHANNEL_2,(uint32_t*)&amp;<a class="code" href="main_8c.html#ac76be59189749cae6e024242f8feefb0">sin_val</a>[0], <a class="code" href="main_8c.html#a06aba3b989aee5c89b5524336abfcb45">POINTS_PERIOD</a>, DAC_ALIGN_12B_R);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  HAL_ADC_Start_DMA(&amp;<a class="code" href="adc_8c.html#acd9221f1aa19aebfe0b744947f2daf49">hadc2</a>, (uint32_t*)&amp;<a class="code" href="main_8c.html#adc8117c094c2089ba60f75b36c13d69e">adc_val</a>[0],2);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="comment">/* USER CODE END 2 */</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="comment">/* Infinite loop */</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="comment">/* USER CODE BEGIN WHILE */</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keywordflow">while</span> (1)</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  {</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="comment">/* USER CODE END WHILE */</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="comment">/* USER CODE BEGIN 3 */</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="comment">/* USER CODE END 3 */</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;}</div>
+<div class="ttc" id="aadc_8c_html_a101e2e3433dfe72bbbd0ae3a84489263"><div class="ttname"><a href="adc_8c.html#a101e2e3433dfe72bbbd0ae3a84489263">MX_ADC2_Init</a></div><div class="ttdeci">void MX_ADC2_Init(void)</div><div class="ttdef"><b>Definition:</b> adc.c:31</div></div>
+<div class="ttc" id="adac_8c_html_a40a0d1383beda58531dfda6218720e45"><div class="ttname"><a href="dac_8c.html#a40a0d1383beda58531dfda6218720e45">hdac</a></div><div class="ttdeci">DAC_HandleTypeDef hdac</div><div class="ttdef"><b>Definition:</b> dac.c:27</div></div>
+<div class="ttc" id="adac_8c_html_adac6621f933c065bc075ac0af3cbbb54"><div class="ttname"><a href="dac_8c.html#adac6621f933c065bc075ac0af3cbbb54">MX_DAC_Init</a></div><div class="ttdeci">void MX_DAC_Init(void)</div><div class="ttdef"><b>Definition:</b> dac.c:32</div></div>
+<div class="ttc" id="adma_8c_html_a323249dac769f9855c10b4ec9446b707"><div class="ttname"><a href="dma_8c.html#a323249dac769f9855c10b4ec9446b707">MX_DMA_Init</a></div><div class="ttdeci">void MX_DMA_Init(void)</div><div class="ttdef"><b>Definition:</b> dma.c:38</div></div>
+<div class="ttc" id="agpio_8c_html_ac724e431d2af879252de35615be2bdea"><div class="ttname"><a href="gpio_8c.html#ac724e431d2af879252de35615be2bdea">MX_GPIO_Init</a></div><div class="ttdeci">void MX_GPIO_Init(void)</div><div class="ttdef"><b>Definition:</b> gpio.c:41</div></div>
+<div class="ttc" id="amain_8c_html_a06aba3b989aee5c89b5524336abfcb45"><div class="ttname"><a href="main_8c.html#a06aba3b989aee5c89b5524336abfcb45">POINTS_PERIOD</a></div><div class="ttdeci">#define POINTS_PERIOD</div><div class="ttdef"><b>Definition:</b> main.c:58</div></div>
+<div class="ttc" id="amain_8c_html_a0a8d1388f8d4b75e00ca93a0efb77967"><div class="ttname"><a href="main_8c.html#a0a8d1388f8d4b75e00ca93a0efb77967">freq_change</a></div><div class="ttdeci">void freq_change(uint16_t PSC, uint32_t FREQ, TIM_HandleTypeDef *htim)</div><div class="ttdoc">Função que calcula o novo valor da frequência quando mudar o o define de DAC_FREQ ou ADC_FREQ,...</div><div class="ttdef"><b>Definition:</b> main.c:248</div></div>
+<div class="ttc" id="amain_8c_html_a577d85c0b45c468874da66c791df7475"><div class="ttname"><a href="main_8c.html#a577d85c0b45c468874da66c791df7475">triangle_gen</a></div><div class="ttdeci">void triangle_gen(int val_n)</div><div class="ttdoc">função que gera uma onda triangular</div><div class="ttdef"><b>Definition:</b> main.c:240</div></div>
+<div class="ttc" id="amain_8c_html_a66fb43f1cba75edadc5f6a89590fee64"><div class="ttname"><a href="main_8c.html#a66fb43f1cba75edadc5f6a89590fee64">triangle_val</a></div><div class="ttdeci">uint16_t triangle_val[POINTS_PERIOD]</div><div class="ttdoc">vetor que recebe os valores da onda triangular</div><div class="ttdef"><b>Definition:</b> main.c:94</div></div>
+<div class="ttc" id="amain_8c_html_a708a9d33b707bbd9398a192347f650d1"><div class="ttname"><a href="main_8c.html#a708a9d33b707bbd9398a192347f650d1">ADC_FREQ</a></div><div class="ttdeci">#define ADC_FREQ</div><div class="ttdoc">frequência do ADC → 10KHz</div><div class="ttdef"><b>Definition:</b> main.c:53</div></div>
+<div class="ttc" id="amain_8c_html_a70af21c671abfcc773614a9a4f63d920"><div class="ttname"><a href="main_8c.html#a70af21c671abfcc773614a9a4f63d920">SystemClock_Config</a></div><div class="ttdeci">void SystemClock_Config(void)</div><div class="ttdoc">System Clock Configuration.</div><div class="ttdef"><b>Definition:</b> main.c:189</div></div>
+<div class="ttc" id="amain_8c_html_a730ec2eaf2cee31805f583395b7cb1c6"><div class="ttname"><a href="main_8c.html#a730ec2eaf2cee31805f583395b7cb1c6">DAC_FREQ</a></div><div class="ttdeci">#define DAC_FREQ</div><div class="ttdoc">frequência do DAC → 2KHz</div><div class="ttdef"><b>Definition:</b> main.c:50</div></div>
+<div class="ttc" id="amain_8c_html_a7a571f13fdd6e6d2b79d38e2cbcaaba0"><div class="ttname"><a href="main_8c.html#a7a571f13fdd6e6d2b79d38e2cbcaaba0">sine_gen</a></div><div class="ttdeci">void sine_gen(int val_n)</div><div class="ttdoc">função que gera uma onda senoidal</div><div class="ttdef"><b>Definition:</b> main.c:232</div></div>
+<div class="ttc" id="amain_8c_html_ac76be59189749cae6e024242f8feefb0"><div class="ttname"><a href="main_8c.html#ac76be59189749cae6e024242f8feefb0">sin_val</a></div><div class="ttdeci">uint16_t sin_val[POINTS_PERIOD]</div><div class="ttdoc">vetor que recebe os valores da onda senoidal</div><div class="ttdef"><b>Definition:</b> main.c:91</div></div>
+<div class="ttc" id="astm32f4xx__it_8c_html_a2c80fd5510e2990a59a5c90d745c716c"><div class="ttname"><a href="stm32f4xx__it_8c.html#a2c80fd5510e2990a59a5c90d745c716c">htim2</a></div><div class="ttdeci">TIM_HandleTypeDef htim2</div><div class="ttdef"><b>Definition:</b> tim.c:27</div></div>
+<div class="ttc" id="astm32f4xx__it_8c_html_a85788cec5a97ee377e4ee2e74f026484"><div class="ttname"><a href="stm32f4xx__it_8c.html#a85788cec5a97ee377e4ee2e74f026484">htim4</a></div><div class="ttdeci">TIM_HandleTypeDef htim4</div><div class="ttdef"><b>Definition:</b> tim.c:28</div></div>
+<div class="ttc" id="atim_8c_html_a4b8ff887fd3fdf26605e35927e4ff202"><div class="ttname"><a href="tim_8c.html#a4b8ff887fd3fdf26605e35927e4ff202">MX_TIM2_Init</a></div><div class="ttdeci">void MX_TIM2_Init(void)</div><div class="ttdef"><b>Definition:</b> tim.c:31</div></div>
+<div class="ttc" id="atim_8c_html_aef1e0b132b1af1c923cc420a57180c67"><div class="ttname"><a href="tim_8c.html#aef1e0b132b1af1c923cc420a57180c67">MX_TIM4_Init</a></div><div class="ttdeci">void MX_TIM4_Init(void)</div><div class="ttdef"><b>Definition:</b> tim.c:85</div></div>
+<div class="ttc" id="ausart_8c_html_a052088fe5bb3f807a4b2502e664fd4fd"><div class="ttname"><a href="usart_8c.html#a052088fe5bb3f807a4b2502e664fd4fd">MX_USART2_UART_Init</a></div><div class="ttdeci">void MX_USART2_UART_Init(void)</div><div class="ttdef"><b>Definition:</b> usart.c:31</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7a571f13fdd6e6d2b79d38e2cbcaaba0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a571f13fdd6e6d2b79d38e2cbcaaba0">&#9670;&nbsp;</a></span>sine_gen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sine_gen </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>val_n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>função que gera uma onda senoidal </p>
+<p>Função que faz o cálculo da onda senoidal. </p>
+<div class="fragment"><div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                            {</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keywordflow">for</span> (i=0; i&lt;val_n; i++){</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            <a class="code" href="main_8c.html#ac76be59189749cae6e024242f8feefb0">sin_val</a>[i] = (1800*(1 + sin(i*2*<a class="code" href="main_8c.html#a598a3330b3c21701223ee0ca14316eca">PI</a>/val_n)));</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        }</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    }</div>
+<div class="ttc" id="amain_8c_html_a598a3330b3c21701223ee0ca14316eca"><div class="ttname"><a href="main_8c.html#a598a3330b3c21701223ee0ca14316eca">PI</a></div><div class="ttdeci">#define PI</div><div class="ttdoc">define do valor de PI usado para fazer os cálculos da onda senoidal</div><div class="ttdef"><b>Definition:</b> main.c:61</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a70af21c671abfcc773614a9a4f63d920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70af21c671abfcc773614a9a4f63d920">&#9670;&nbsp;</a></span>SystemClock_Config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SystemClock_Config </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>System Clock Configuration. </p>
+<dl class="retval"><dt>Valores Retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Configure the main internal regulator output voltage</p>
+<p>Initializes the RCC Oscillators according to the specified parameters in the RCC_OscInitTypeDef structure.</p>
+<p>Initializes the CPU, AHB and APB buses clocks</p>
+<div class="fragment"><div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;{</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  RCC_OscInitTypeDef RCC_OscInitStruct = {0};</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  __HAL_RCC_PWR_CLK_ENABLE();</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  RCC_OscInitStruct.HSIState = RCC_HSI_ON;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  RCC_OscInitStruct.PLL.PLLM = 16;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  RCC_OscInitStruct.PLL.PLLN = 336;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  RCC_OscInitStruct.PLL.PLLQ = 2;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  RCC_OscInitStruct.PLL.PLLR = 2;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keywordflow">if</span> (HAL_RCC_OscConfig(&amp;RCC_OscInitStruct) != HAL_OK)</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <a class="code" href="main_8c.html#a1730ffe1e560465665eb47d9264826f9">Error_Handler</a>();</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  }</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="keywordflow">if</span> (HAL_RCC_ClockConfig(&amp;RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  {</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="main_8c.html#a1730ffe1e560465665eb47d9264826f9">Error_Handler</a>();</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  }</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;}</div>
+<div class="ttc" id="amain_8c_html_a1730ffe1e560465665eb47d9264826f9"><div class="ttname"><a href="main_8c.html#a1730ffe1e560465665eb47d9264826f9">Error_Handler</a></div><div class="ttdeci">void Error_Handler(void)</div><div class="ttdoc">This function is executed in case of error occurrence.</div><div class="ttdef"><b>Definition:</b> main.c:277</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a577d85c0b45c468874da66c791df7475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a577d85c0b45c468874da66c791df7475">&#9670;&nbsp;</a></span>triangle_gen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void triangle_gen </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>val_n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>função que gera uma onda triangular </p>
+<p>Função que faz o cálculo da onda triangular. </p>
+<div class="fragment"><div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                                {</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        <span class="keywordflow">for</span>(i=0; i&lt;val_n; i++){</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <a class="code" href="main_8c.html#a66fb43f1cba75edadc5f6a89590fee64">triangle_val</a>[i] = i*4000/val_n;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        }</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Variáveis</h2>
+<a id="adc8117c094c2089ba60f75b36c13d69e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc8117c094c2089ba60f75b36c13d69e">&#9670;&nbsp;</a></span>adc_val</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint16_t adc_val[2] = {0,0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>vetor que armazena os valores de cada canal do ADC </p>
+
+</div>
+</div>
+<a id="ab4755da781cf996b02fcc5dcc67ed49a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4755da781cf996b02fcc5dcc67ed49a">&#9670;&nbsp;</a></span>ch0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t ch0 =0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>canais do ADC </p>
+
+</div>
+</div>
+<a id="a7e510643ae23882d12cf269abc340e20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e510643ae23882d12cf269abc340e20">&#9670;&nbsp;</a></span>ch1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t ch1 =0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac76be59189749cae6e024242f8feefb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac76be59189749cae6e024242f8feefb0">&#9670;&nbsp;</a></span>sin_val</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t sin_val[<a class="el" href="main_8c.html#a06aba3b989aee5c89b5524336abfcb45">POINTS_PERIOD</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>vetor que recebe os valores da onda senoidal </p>
+
+</div>
+</div>
+<a id="a66fb43f1cba75edadc5f6a89590fee64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66fb43f1cba75edadc5f6a89590fee64">&#9670;&nbsp;</a></span>triangle_val</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t triangle_val[<a class="el" href="main_8c.html#a06aba3b989aee5c89b5524336abfcb45">POINTS_PERIOD</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>vetor que recebe os valores da onda triangular </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
